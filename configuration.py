@@ -17,12 +17,12 @@ Rho = 5.0/6
 Low = 0.0
 IncreasingRatio = 1
 MaxSolvingTime = 300
-Threshold = 1
+Threshold = 0.5
 beta, weight, r = {}, {}, {}
 for i in range(0, 24):
-    beta[i] = 60
+    beta[i] = 600
     weight[i] = 1
-    r[i] = 0.1
+    r[i] = 1
 
 # Setting Peak Hour
 peak_hour = []

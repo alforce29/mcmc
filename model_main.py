@@ -3,6 +3,7 @@ from src.demand_calculation import *
 from src.gurobi_solver import *
 from configuration import *
 import pickle
+import pandas as pd
 import os
 
 if __name__ == '__main__':
@@ -10,10 +11,16 @@ if __name__ == '__main__':
     # Sub-step 1-1: Read gird data
     with open(GridAndStationInfomationPath + 'griddata.pkl', 'rb') as fin:
         grid_data = pickle.load(fin)
+    grid_data['hour'] = 1
+    # grid_data = pd.read_excel('data/griddata.xlsx')
+    # grid_data = pd.read_csv('data/grid_data.csv')
 
     # Sub-step 1-2: Read station data
-    with open(GridAndStationInfomationPath + 'stationdata.pkl', 'rb') as fin:
-        station_data = pickle.load(fin)
+    # with open(GridAndStationInfomationPath + 'stationdata.pkl', 'rb') as fin:
+    #     station_data = pickle.load(fin)
+
+    station_data = pd.read_csv('data/station.csv')
+
     # Sub-step 1-3: Use calculation_solver to generate pkl file with unsatisfied demand
     if not os.path.exists(DepressionAreaResultPath):
         os.makedirs(DepressionAreaResultPath)
@@ -23,10 +30,14 @@ if __name__ == '__main__':
     # Sub-step 2-1: Read grid data if you skip the step 1
     with open(GridAndStationInfomationPath + 'griddata.pkl', 'rb') as fin:
         grid_data = pickle.load(fin)
+    grid_data['hour'] = 1
+    # grid_data = pd.read_excel('data/griddata.xlsx')
+    station_data = pd.read_csv('data/station.csv')
+    # grid_data = pd.read_csv('data/grid_data.csv')
 
     # Sub-step 2-2: Read station data if you skip the step 1
-    with open(GridAndStationInfomationPath + 'stationdata.pkl', 'rb') as fin:
-        station_data = pickle.load(fin)
+    # with open(GridAndStationInfomationPath + 'stationdata.pkl', 'rb') as fin:
+    #     station_data = pickle.load(fin)
 
     # Sub-Step 2-3: Do the evaluation
     if not os.path.exists(EvaluationResultPath):
@@ -47,9 +58,13 @@ if __name__ == '__main__':
     # Step 4: alternative step if the clients have no recommendation points
     with open(GridAndStationInfomationPath + 'griddata.pkl', 'rb') as fin:
         grid_data = pickle.load(fin)
+    grid_data['hour'] = 1
+    # grid_data = pd.read_excel('data/griddata.xlsx')
+    station_data = pd.read_csv('data/station.csv')
+    # grid_data = pd.read_csv('data/grid_data.csv')
 
-    with open(GridAndStationInfomationPath + 'stationdata.pkl', 'rb') as fin:
-        station_data = pickle.load(fin)
+    # with open(GridAndStationInfomationPath + 'stationdata.pkl', 'rb') as fin:
+    #     station_data = pickle.load(fin)
 
     if not os.path.exists(StandardResultPath):
         os.makedirs(StandardResultPath)
